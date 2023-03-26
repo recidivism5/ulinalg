@@ -34,9 +34,11 @@ float fvec3Length(FVec3 v){
 	return sqrtf(fvec3Dot(v,v));
 }
 FVec3 fvec3Cross(FVec3 a, FVec3 b){
-	return (FVec3){a.y*b.z - a.z*b.y,
-				   a.z*b.x - a.x*b.z,
-				   a.x*b.y - a.y*b.x};
+	return (FVec3){
+		a.y*b.z - a.z*b.y,
+		a.z*b.x - a.x*b.z,
+		a.x*b.y - a.y*b.x
+	};
 }
 FVec3 fvec3Add(FVec3 a, FVec3 b){
 	FOR(i,3) a.arr[i] += b.arr[i];
@@ -72,10 +74,12 @@ FVec3 clampEuler(FVec3 e){
 	return e;
 }
 Mat4 mat4Identity(void){
-	return (Mat4){1,0,0,0,
-				  0,1,0,0,
-				  0,0,1,0,
-				  0,0,0,1};
+	return (Mat4){
+		1,0,0,0,
+		0,1,0,0,
+		0,0,1,0,
+		0,0,0,1
+	};
 }
 Mat4 mat4Basis(FVec3 x, FVec3 y, FVec3 z){
 	Mat4 m = mat4Identity();
@@ -86,8 +90,8 @@ Mat4 mat4Basis(FVec3 x, FVec3 y, FVec3 z){
 }
 Mat4 mat4Transpose(Mat4 m){
 	float a1 = m.a1, a2 = m.a2, a3 = m.a3,
-		  b2 = m.b2, b3 = m.b3,
-		  c3 = m.c3;
+	b2 = m.b2, b3 = m.b3,
+	c3 = m.c3;
 	m.a1 = m.b0; m.a2 = m.c0; m.a3 = m.d0;
 	m.b2 = m.c1; m.b3 = m.d1;
 	m.c3 = m.d2;
@@ -108,10 +112,12 @@ Mat4 mat4Ortho(float left, float right, float bottom, float top, float near, flo
 Mat4 mat4Persp(float fovRadians, float aspectRatio, float near, float far){
 	float s = 1.0f / tanf(fovRadians * 0.5f);
 	float d = near - far;
-	return (Mat4){s/aspectRatio,0,0,0,
-				  0,s,0,0,
-				  0,0,(far+near)/d,-1,
-				  0,0,(2*far*near)/d,0};
+	return (Mat4){
+		s/aspectRatio,0,0,0,
+		0,s,0,0,
+		0,0,(far+near)/d,-1,
+		0,0,(2*far*near)/d,0
+	};
 }
 Mat4 mat4Scale(FVec3 v){
 	Mat4 m = mat4Identity();
@@ -127,24 +133,30 @@ Mat4 mat4Pos(FVec3 v){
 }
 Mat4 mat4RotX(float angle){
 	float c = cos(angle), s = sin(angle);
-	return (Mat4){1,0,0,0,
-				  0,c,s,0,
-				  0,-s,c,0,
-				  0,0,0,1};
+	return (Mat4){
+		1,0,0,0,
+		0,c,s,0,
+		0,-s,c,0,
+		0,0,0,1
+	};
 }
 Mat4 mat4RotY(float angle){
 	float c = cos(angle), s = sin(angle);
-	return (Mat4){c,0,-s,0,
-				  0,1,0,0,
-				  s,0,c,0,
-				  0,0,0,1};
+	return (Mat4){
+		c,0,-s,0,
+		0,1,0,0,
+		s,0,c,0,
+		0,0,0,1
+	};
 }
 Mat4 mat4RotZ(float angle){
 	float c = cos(angle), s = sin(angle);
-	return (Mat4){c,s,0,0,
-				  -s,c,0,0,
-				  0,0,1,0,
-				  0,0,0,1};
+	return (Mat4){
+		c,s,0,0,
+		-s,c,0,0,
+		0,0,1,0,
+		0,0,0,1
+	};
 }
 Mat4 mat4Mul(Mat4 a, Mat4 b){
 	Mat4 m;
